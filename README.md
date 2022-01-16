@@ -3,7 +3,9 @@
 Encrypter is a web app which encrypts simple strings using a shuffle cipher algorithm
 Hey, everyone!  I'm Nikhil Narayanan- an individual JAVA SWING/AWT dev, and today we'll  be talking about a program to convert plain text into a string unreadable by others, which can be reformatted into the original text. In other words, an encryption algorithm
 
-[Note: This is more of a shuffle algorithm than an industry standard encryption algorithm and is susceptible to reverse engineering. This text encryption algorithm is more of a fun little side project than a guarantor of privacy]
+[Note: This is more of a shuffle algorithm than an industry standard encryption algorithm and is susceptible to reverse engineering. This text encryption algorithm is more of a fun little side project than a guarantor of privacy.
+Also, algorithms are shown here in java, but this project is a web app, so the code in the file uploaded in vanilaa js
+]
 
 What exactly does this program do, you might ask? Simple, really- it reads the ASCII values of each character in the string inputted by the user and just, well- plays around with the values. Think about it for a second- the ASCII value for the space character is 32, right? Now boost that value up by a random number between 8000 to 22000, say 9000- the said ASCII value now becomes 32+9000=9032 i.e '⍈. 
 
