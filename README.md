@@ -1,5 +1,6 @@
 # Shuffle Cipher Web
-![EncrypterEG](https://user-images.githubusercontent.com/68727041/150775172-312bce1e-952d-49e1-ac7b-4aea209d847c.png)
+![EncrypterEG](https://user-images.githubusercontent.com/68727041/151682661-52826058-93a8-474a-b60a-5464b9b59898.png)
+
 <br>
 [Test the app on this site!:](https://www.swingguiking.com/my-work-1)
 <br>
