@@ -2,7 +2,7 @@
 ![EncrypterEG](https://user-images.githubusercontent.com/68727041/151682661-52826058-93a8-474a-b60a-5464b9b59898.png)
 
 
-[Test the web app on this site!](nikhil-rgb.github.io)
+[Test the web app on this site!](https://nikhil-rgb.github.io/)
 <br>
 Shuffle Cipher is a web app which encrypts simple strings using a shuffle cipher algorithm.
 **NOW COMPATIBLE WITH SHUFFLE CIPHER DESKTOP VERSION**
