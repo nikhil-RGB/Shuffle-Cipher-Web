@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
@@ -47,23 +47,44 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+        
+        #CIPHER {
+            color: green;
+            background-color: black;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .labs {
+            background-color: black;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <textarea name="TYPE1" type="text" placeholder="Enter text here" id="23" class="cont" rows="15" cols="60"></textarea>
-        <br />
+        <br /><br>
+        <label class="labs">Click button to encrypt/decrypt text in the box above</label>
+        <br>
+        <button type="button" value="Encrypt" id="CIPHER">Encrypt</button>
+        <br/><br>
         <textarea id="24" placeholder="Encrypted/Decrypted text will be shown here" class="font" rows="15" cols="60"></textarea>
         <div>
+            <label class="labs">Switch between Encryption/Decryption Mode</label>
+            <br>
             <select id="enc">
-                <option value="Encrypt">Encrypt</option>
-                <option value="Decrypt">Decrypt</option>
-            </select>
+            <option value="Encrypt">Encrypt</option>
+            <option value="Decrypt">Decrypt</option>
+        </select>
         </div>
     </div>
     <script>
         // JavaScript source code
+
         class Encrypter {
             static performPadding(s) {
                 while (s.length < 4) {
@@ -150,35 +171,82 @@
 
         function boom() {
             let inp = window.document.getElementById("23");
-            let tex = Encrypter.doEncryption(inp.value);
-            console.log(tex);
+            let bEnc = inp.value.split("\n");
+            let psswd = "";
+            let flag;
+            do {
+                psswd = prompt("Would you like to password-lock this encryption?\n Click cancel if you'd like to encrypt without a password.");
+                if (psswd === null) {
+                    break;
+                }
+                flag = (psswd.length == 0) || (psswd.indexOf(" ") != -1);
+                if (flag) {
+                    alert("Invalid Password, password cannot be empty or have spaces.");
+                }
+            }
+            while (flag);
+            bEnc = bEnc.map((elem) => {
+                return Encrypter.doEncryption(elem);
+            });
+            let string = "";
+            if (psswd === null) {
+                string = "false";
+            } else {
+                string = "true" + " " + psswd;
+            }
+            string = Encrypter.encrypt(string) + "\n";
+            let tex = string + bEnc.join("\n");
             let out = window.document.getElementById("24");
             out.value = tex
 
         }
-
+        //Decryption routine final
         function antiBoom() {
             let inp = window.document.getElementById("23");
-            let tex = Encrypter.doDecryption(inp.value);
+            let bdec = inp.value;
+            let sens = bdec.split("\n");
+            let pass = Encrypter.decrypt(sens.shift()).split(" ");
+            if (pass[0] === "true") {
+                userp = prompt("This encryption is password protected, please enter the password this message was locked");
+                if (userp === null) {
+                    return;
+                } else if (!(userp === pass[1])) {
+                    alert("Incorrect Password entered, try again.");
+                    return;
+                }
+            } else if (pass[0] !== "false") {
+                alert("This message was either tampered with or encrypted with an older version of the application and can no longer be decrypted.");
+                return;
+            }
+            sens = sens.map((elem) => {
+                return Encrypter.doDecryption(elem);
+            });
+            let tex = sens.join("\n");
             let out = window.document.getElementById("24");
-            console.log(out);
             out.value = tex;
 
         }
         let tf = window.document.getElementById("23");
         let ta = window.document.getElementById("24");
+        let button = document.getElementById("CIPHER");
 
         function logger(e) {
-            let text = tf.value;
+            //let text = tf.value;
             let op = window.document.getElementById("enc");
             if (op.value === "Encrypt") {
-                text = Encrypter.doEncryption(text);
+                boom();
             } else {
-                text = Encrypter.doDecryption(text);
+                antiBoom();
             }
-            ta.value = text;
+
         }
-        tf.addEventListener("input", logger);
+        button.addEventListener("click", logger);
+        let op1 = window.document.getElementById("enc");
+        op1.addEventListener("change", function() {
+            button.textContent = op1.value;
+            tf.value = "";
+            ta.value = "";
+        });
     </script>
 
 </body>
