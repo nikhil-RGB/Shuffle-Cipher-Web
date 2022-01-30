@@ -3,9 +3,8 @@
 <br>
 [Test the app on this site!:](https://www.swingguiking.com/my-work-1)
 <br>
-*NOT COMPATIBLE WITH SHUFFLE-CIPHER-DESKTOP APPLICATION*
-<br>
 Shuffle Cipher is a web app which encrypts simple strings using a shuffle cipher algorithm.
+**NOW COMPATIBLE WITH SHUFFLE CIPHER DESKTOP VERSION**
 <br>
 [Note: This is more of a shuffle algorithm than an industry standard encryption algorithm and is susceptible to reverse engineering. This text encryption algorithm is more of a fun little side project than a guarantor of privacy.
 Also, most algorithms are shown here in java, but this project is a web app, so the code in the file uploaded in vanilla js]
