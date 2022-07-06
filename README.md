@@ -1,15 +1,19 @@
 # Shuffle Cipher Web
 ![EncrypterEG](https://user-images.githubusercontent.com/68727041/151682661-52826058-93a8-474a-b60a-5464b9b59898.png)
 
+<br>
 
-[Test the web app on this site!](https://nikhil-rgb.github.io/apps/cipher/index.html)
+### Purpose:
+
+Shuffle Cipher is a web app which ciphers simple strings using a shuffle-cipher algorithm I cooked up for fun.<br/>
+It allows users to prevent third parties from accessing information as plain text. Simple messages are converted to ciphered ASCII garbage text
 <br>
-Shuffle Cipher is a web app which encrypts simple strings using a shuffle cipher algorithm.
-**NOW COMPATIBLE WITH SHUFFLE CIPHER DESKTOP VERSION**
+Note: This is more of a cipher algorithm than an industry standard encryption algorithm and is susceptible to reverse engineering. This text encryption algorithm is more of a fun little side project than a guarantor of privacy.
+Also, most algorithms are shown here in java, but this project is a web app, so the code in the file uploaded in vanilla js.
 <br>
-[Note: This is more of a shuffle algorithm than an industry standard encryption algorithm and is susceptible to reverse engineering. This text encryption algorithm is more of a fun little side project than a guarantor of privacy.
-Also, most algorithms are shown here in java, but this project is a web app, so the code in the file uploaded in vanilla js]
-<br>
+
+### Implementation Details:
+
 What exactly does this program do, you might ask? Simple, really- it reads the ASCII values of each character in the string inputted by the user and just, well- plays around with the values. Think about it for a second- the ASCII value for the space character is 32, right? Now boost that value up by a random number between 8000 to 22000, say 9000- the said ASCII value now becomes 32+9000=9032 i.e '⍈'. 
 
 Now, what if we took in a string and boosted each character in the string by 9000?
@@ -251,3 +255,7 @@ Decryption routines:
 ```
 
 As you can see, simple manipulations of ASCII values render the text unreadable to the human eye. As mentioned earlier, the algorithm can be brute forced/reverse engineered with encrypted text to decrypted text comparisons, and is not industry standard-it's still a great example of how simple manipulations of ASCII values can reflect on the original string!
+
+### Using the Web-app:
+
+[Test the web app on this site!](https://nikhil-rgb.github.io/apps/cipher/index.html)
