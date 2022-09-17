@@ -5,21 +5,21 @@ body {
 }
 
 #main-header {
-    color: white;
+    white-space: nowrap;
+    color: cyan;
     box-sizing: border-box;
     position: top;
     width: 956px;
     height: 103px;
     left: 386px;
     top: 95px;
-    font-family: 'Bebas Neue';
+    font-family: 'Courier';
     font-style: normal;
     font-weight: 400;
     font-size: 96px;
     line-height: 115px;
     text-align: center;
     letter-spacing: 0.27em;
-    border: 3px solid rgba(251, 251, 251, 0.69);
     text-shadow: 0px 0px 50px rgba(251, 251, 251, 0.69);
 }
 
