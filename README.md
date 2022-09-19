@@ -1,5 +1,6 @@
 # Shuffle Cipher Web
-![EncrypterEG](https://user-images.githubusercontent.com/68727041/151682661-52826058-93a8-474a-b60a-5464b9b59898.png)
+
+<img src="assets/preview_sh.png">
 
 <br>
 
