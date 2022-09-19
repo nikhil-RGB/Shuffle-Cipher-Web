@@ -53,13 +53,13 @@
         background-size: cover;
     }
     #main-header {
+        color: white;
         box-sizing: border-box;
-        color: cyan;
         position: top;
-        width: 956px;
-        height: 103px;
-        left: 386px;
-        top: 95px;
+        /* width: 956px;
+            height: 103px;
+            left: 500px;
+            top: 95px;*/
         font-family: 'Bebas Neue';
         font-style: normal;
         font-weight: 400;
@@ -67,8 +67,8 @@
         line-height: 115px;
         text-align: center;
         letter-spacing: 0.27em;
-        border: 3px solid green;
-        text-shadow: 0px 50px 50px rgba(24, 99, 127, 0.69);
+        /*border: 3px solid rgba(251, 251, 251, 0.69);*/
+        text-shadow: 0px 0px 50px rgba(251, 251, 251, 0.69);
     }
     #enc:hover {
         border: 5px solid green;
