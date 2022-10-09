@@ -4,6 +4,9 @@
 
 <br>
 
+Basic UI designed in FIGMA by **Chandrama Saha**.<br/>
+[Click here to view design in FIGMA](https://www.figma.com/community/file/1155173188042348229)
+
 ### Purpose:
 
 Shuffle Cipher is a web app which ciphers simple strings using a shuffle-cipher algorithm I cooked up for fun.<br/>
