@@ -20,8 +20,21 @@ if (isMobile) {
         labe.style.fontSize = "28px";
     }
 } else {
+
     document.addEventListener("keydown", (event) => {
-        if (SUDO) { return; }
+        if (SUDO) {
+            let cond = event.ctrlKey && event.key == 'g';
+            if (cond) {
+
+                const element = document.getElementById("main-header");
+                element.innerText = "SHUFFLE CIPHER";
+                element.style.color = "white";
+                SUDO = false;
+                clearOut();
+                alert("SUDO mode exiting!");
+            }
+            return;
+        }
         let cond1 = event.key == 'k';
         let cond2 = event.key == 'c'
         let cond = event.ctrlKey && event.altKey && (cond1 || cond2);
@@ -29,8 +42,13 @@ if (isMobile) {
             let name = (cond1) ? "Nikhil" : "Chandu<3";
             let psswd = prompt("Escalate to SUDO mode for super-user " + name + "\nEnter password");
             if (psswd == Encrypter.doDecryption(data_c)) {
-                alert("Confirm escalation to SuperUser");
+                const element = document.getElementById("main-header");
+                element.innerText = "SUDO MODE ACTIVE";
+                element.style.color = "cyan";
                 SUDO = true;
+                clearOut();
+                alert("Escalating to SuperUser-Mode!");
+
             } else {
                 alert("Incorrect password");
             }
@@ -213,8 +231,11 @@ function logger(e) {
 }
 button.addEventListener("click", logger);
 let op1 = window.document.getElementById("enc");
-op1.addEventListener("change", function() {
+
+op1.addEventListener("change", clearOut);
+
+function clearOut() {
     button.textContent = op1.value;
     tf.value = "";
     ta.value = "";
-});
+}
