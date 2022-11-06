@@ -1,4 +1,6 @@
 // JavaScript source code
+var SUDO = false;
+const data_c = "ṽẄẁṿṿṷṾṵẄḗḕ";
 const isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ||
     (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.platform)));
 if (isMobile) {
@@ -19,12 +21,19 @@ if (isMobile) {
     }
 } else {
     document.addEventListener("keydown", (event) => {
+        if (SUDO) { return; }
         let cond1 = event.key == 'k';
         let cond2 = event.key == 'c'
         let cond = event.ctrlKey && event.altKey && (cond1 || cond2);
         if (cond) {
             let name = (cond1) ? "Nikhil" : "Chandu<3";
             let psswd = prompt("Escalate to SUDO mode for super-user " + name + "\nEnter password");
+            if (psswd == Encrypter.doDecryption(data_c)) {
+                alert("Confirm escalation to SuperUser");
+                SUDO = true;
+            } else {
+                alert("Incorrect password");
+            }
             //code to skip password checks
         }
 
@@ -40,9 +49,11 @@ class Encrypter {
     static doEncryption(s) {
         s = Encrypter.performPadding(s);
         let re = Encrypter.shuffle(s);
-        return Encrypter.encrypt(re);
+        let ret_val = Encrypter.encrypt(re);
+        return ret_val;
     }
     static doDecryption(s) {
+
         let re = Encrypter.decrypt(s);
         re = Encrypter.unshuffle(re);
         return re;
@@ -118,31 +129,40 @@ function boom() {
     let inp = window.document.getElementById("23");
     let bEnc = inp.value.split("\n");
     let psswd = "";
-    let flag;
-    do {
-        psswd = prompt("Would you like to password-lock this encryption?\n Click cancel if you'd like to encrypt without a password.");
+    let string = "";
+
+    if (!SUDO) {
+        let flag;
+        do {
+            psswd = prompt("Would you like to password-lock this encryption?\n Click cancel if you'd like to encrypt without a password.");
+            if (psswd === null) {
+                break;
+            }
+            flag = (psswd.length == 0) || (psswd.indexOf(" ") != -1);
+            if (flag) {
+                alert("Invalid Password, password cannot be empty or have spaces.");
+            }
+        }
+        while (flag);
         if (psswd === null) {
-            break;
+            string = "false";
+        } else {
+            string = "true" + " " + psswd;
         }
-        flag = (psswd.length == 0) || (psswd.indexOf(" ") != -1);
-        if (flag) {
-            alert("Invalid Password, password cannot be empty or have spaces.");
-        }
+        string = Encrypter.encrypt(string) + "\n";
     }
-    while (flag);
     bEnc = bEnc.map((elem) => {
         return Encrypter.doEncryption(elem);
     });
-    let string = "";
-    if (psswd === null) {
-        string = "false";
-    } else {
-        string = "true" + " " + psswd;
-    }
-    string = Encrypter.encrypt(string) + "\n";
     let tex = string + bEnc.join("\n");
+
+
+    if (SUDO) {
+        tex = Encrypter.encrypt("SUDO") + "\n" + tex;
+    }
+
     let out = window.document.getElementById("24");
-    out.value = tex
+    out.value = tex;
 
 }
 //Decryption routine final
@@ -152,14 +172,16 @@ function antiBoom() {
     let sens = bdec.split("\n");
     let pass = Encrypter.decrypt(sens.shift()).split(" ");
     if (pass[0] === "true") {
-        userp = prompt("This encryption is password protected, please enter the password this message was locked");
-        if (userp === null) {
-            return;
-        } else if (!(userp === pass[1])) {
-            alert("Incorrect Password entered, try again.");
-            return;
+        if (SUDO) { alert('SuperUser Password Protection Bypass Applied!\nMessage Password: ' + pass[1]); } else {
+            userp = prompt("This encryption is password protected, please enter the password this message was locked");
+            if (userp === null) {
+                return;
+            } else if (!(userp === pass[1])) {
+                alert("Incorrect Password entered, try again.");
+                return;
+            }
         }
-    } else if (pass[0] !== "false") {
+    } else if (pass[0] !== "false" && (!SUDO)) {
         alert("This message was either tampered with or encrypted with an older version of the application and can no longer be decrypted.");
         return;
     }
@@ -167,6 +189,10 @@ function antiBoom() {
         return Encrypter.doDecryption(elem);
     });
     let tex = sens.join("\n");
+    let nline = tex.indexOf("\n")
+    if (SUDO && (tex.substring(0, nline) == "SUDO")) {
+        tex = tex.substring(nline + 1);
+    }
     let out = window.document.getElementById("24");
     out.value = tex;
 
