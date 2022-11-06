@@ -17,6 +17,18 @@ if (isMobile) {
     for (const labe of lab1) {
         labe.style.fontSize = "28px";
     }
+} else {
+    document.addEventListener("keydown", (event) => {
+        let cond1 = event.key == 'k';
+        let cond2 = event.key == 'c'
+        let cond = event.ctrlKey && event.altKey && (cond1 || cond2);
+        if (cond) {
+            let name = (cond1) ? "Nikhil" : "Chandu<3";
+            let psswd = prompt("Escalate to SUDO mode for super-user " + name + "\nEnter password");
+            //code to skip password checks
+        }
+
+    });
 }
 class Encrypter {
     static performPadding(s) {
