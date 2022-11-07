@@ -19,6 +19,69 @@ if (isMobile) {
     for (const labe of lab1) {
         labe.style.fontSize = "28px";
     }
+
+    //code to detect swipes
+
+    document.addEventListener('touchstart', handleTouchStart, false);
+    document.addEventListener('touchmove', handleTouchMove, false);
+
+    var xDown = null;
+    var yDown = null;
+
+    function getTouches(evt) {
+        return evt.touches ||
+            evt.originalEvent.touches;
+    }
+
+    function handleTouchStart(evt) {
+        const firstTouch = getTouches(evt)[0];
+        xDown = firstTouch.clientX;
+        yDown = firstTouch.clientY;
+    };
+
+    function handleTouchMove(evt) {
+        if (!xDown || !yDown) {
+            return;
+        }
+
+        var xUp = evt.touches[0].clientX;
+        var yUp = evt.touches[0].clientY;
+
+        var xDiff = xDown - xUp;
+        var yDiff = yDown - yUp;
+
+        if (Math.abs(xDiff) > Math.abs(yDiff)) {
+            if (xDiff > 0) {
+                console.log("Left side");
+                /* left swipe */
+                if (SUDO) { return; }
+                let pwd = prompt("Enter password to escalate to SUDO mode:");
+                if (!(pwd == Encrypter.doDecryption(data_c))) {
+                    alert("Incorrect password");
+                    return;
+                }
+                SUDO = true;
+                clearOut();
+                alert("Escalation to SUDO mode approved!");
+
+            } else {
+                /* right swipe */
+
+                console.log("Right side");
+                if (!SUDO) { return; }
+                SUDO = false;
+                clearOut();
+                alert("SUDO mode will now deactivate");
+            }
+        }
+        /* reset values */
+        xDown = null;
+        yDown = null;
+    };
+
+
+    //end of swipe gesture code
+
 } else {
 
     document.addEventListener("keydown", (event) => {
