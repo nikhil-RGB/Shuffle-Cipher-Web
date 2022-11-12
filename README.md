@@ -1,6 +1,6 @@
 # Shuffle Cipher Web
 
-<img src="assets/preview_sh.png">
+<img src="assets/preview.png">
 
 <br>
 
